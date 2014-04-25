@@ -26,18 +26,37 @@ describe RH::PlayTurn do
       expect(result.success?).to eq false
       expect(result.error).to eq :invalid_move
     end
+  end
 
-    it "adds a roll to the current turn" do
+  describe 'Rolling' do
+
+    before do
       expect(game.dice_cup.dice_count).to eq 13
+      expect(game.turns.last.rolls.count).to eq 0
 
       expect(result.success?).to eq true
+      @game = result.game
+    end
 
-      game = result.game
-      expect(game.dice_cup.dice_count).to eq 10
-      turn = game.turns.last
+    it "adds a roll to the current turn" do
+      expect(result.success?).to eq true
+      turn = @game.turns.last
       expect(turn.rolls.count).to eq 1
     end
 
+    it "subtracts the roll from the dice cup" do
+      expect(@game.dice_cup.dice_count).to eq 10
+    end
+
+    it "adds a roll with valid results" do
+      roll = @game.turns.last.rolls.last
+      expect(roll.results.count).to eq(3)
+
+      die = roll.results.first
+      expect(die).to be_a RH::Die
+      expect(die.color).to match /^green|yellow|red$/
+      expect(die.type).to match /^meat|paws|blast$/
+    end
   end
 
 end

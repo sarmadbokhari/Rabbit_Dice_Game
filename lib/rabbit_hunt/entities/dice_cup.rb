@@ -4,9 +4,9 @@ module RH
     def initialize(attrs={})
       @dice = []
 
-      6.times { @dice.push 'G' }
-      4.times { @dice.push 'Y' }
-      3.times { @dice.push 'R' }
+      6.times { @dice.push 'green' }
+      4.times { @dice.push 'yellow' }
+      3.times { @dice.push 'red' }
     end
 
     def dice_count

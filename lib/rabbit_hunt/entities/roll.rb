@@ -1,19 +1,21 @@
 module RH
   class Roll < Entity
+    attr_reader :results
 
     def initialize(attrs={})
       @dice = attrs[:dice]
       @result = @dice.map do |dice_color|
-        dice_result[dice_color].sample
+        type = dice_result[dice_color].sample
+        Die.new :type => type, :color => dice_color
       end
     end
 
     def dice_result()
       # M = Meat, P = Paw, B = Blast
       {
-        'G' => %w{M M M P P B},
-        'Y' => %w{M M P P B B},
-        'R' => %w{M P P B B B}
+        'green'  => %w{meat meat meat paws paws blast},
+        'yellow' => %w{meat meat paws paws blast blast},
+        'red'    => %w{meat paws paws blast blast blast}
       }
     end
 
