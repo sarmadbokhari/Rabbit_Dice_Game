@@ -4,10 +4,12 @@ module RabbitDice
 
       def initialize
         @games = {}
+        @game_id_counter = 0
       end
 
       def create_game(attrs)
         game = Game.new(:players => attrs[:players], :dice_cup => DiceCup.new)
+        game.id = (@game_id_counter += 1)
         @games[game.id] = game
 
         starting_player = game.players.sample
@@ -17,6 +19,7 @@ module RabbitDice
       end
 
       def get_game(id)
+        id = id.to_i
         # Since everything is in one object, this might be really messy later when we add persistence
         # Or, if we choose the right database (*cough* document-oriented database *cough*) it might not!
         # (A document-oriented database might be the right choice *for this project* because there is no

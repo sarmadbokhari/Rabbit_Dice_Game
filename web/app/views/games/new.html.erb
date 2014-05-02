@@ -1,0 +1,20 @@
+<h1>Create a Rabbit Dice Game</h1>
+<h2>Enter names of players</h2>
+
+<!-- Vanilla HTML -->
+<input type="submit" value="Add player" class="add_player">
+<input type="submit" value="Remove player" class="remove_player">
+<br>
+<p>Add at least two players:</p>
+<form action="/games" method="post">
+  <div class="new_player">
+    <input type="text" class="player" name="players[]">
+    <br><input type="text" class="player" name="players[]">
+  </div>
+
+  <br><br>
+  <input type="submit" value="Start Game" class="start-game-btn">
+
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+</form>

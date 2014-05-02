@@ -1,0 +1,13 @@
+<h1>Hello, you are viewing Game <%= params[:id] %>
+</h1>
+
+<h3>Players</h3>
+<% @game.players.each do |player| %>
+  <ul>
+    <li><%= player %> - (score will go here, soon I hope)</li>
+  </ul>
+<% end %>
+
+
+<input type="submit" value="Roll" class="roll" />
+<input type="submit" value="Stop/Score" class="stop_score" />

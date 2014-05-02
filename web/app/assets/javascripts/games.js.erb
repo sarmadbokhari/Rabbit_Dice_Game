@@ -1,0 +1,22 @@
+$(document).ready(function(){
+  $(".add_player").on('click', function(){
+    $(".new_player").append('<br><input type="text" class="player" name="players[]">');
+  })
+  $(".remove_player").on('click', function(){
+    $(".player").last().remove();
+  })
+  $(".start-game-btn").on('click', function(e){
+    // e.preventDefault();
+    var players = [];
+    var inputs = $('input.player');
+    for (var i = 0; i < inputs.length; i++){
+      players.push($(inputs[i]).val());
+    }
+    console.log(players)
+    // $.post('/games', {players: players} ,function(data){
+    //   if(data.success){
+    //     window.location = "/games/" + data.game.id;
+    //   }
+    // })
+  })
+})
